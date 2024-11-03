@@ -1,0 +1,45 @@
+datasource db {
+  provider = "postgresql"
+  url = env("POSTGRES_PRISMA_URL") // uses connection pooling
+  directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
+}
+
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+model Devis {
+  id        Int      @id @default(autoincrement())
+  clientId  Int
+  client    Client   @relation(fields: [clientId], references: [id])
+  montant   Float
+  date      DateTime @default(now())
+}
+
+
+model Client {
+  id        Int      @id @default(autoincrement())
+  nom       String
+  prenom    String
+  email     String
+  telephone String
+  adresse   String
+  ville     String
+  codePostal String
+  devis     Devis[]
+}
+
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  password String
+  role     String
+  nom      String
+  prenom   String
+  telephone String
+  adresse  String
+  ville    String
+  codePostal String
+}

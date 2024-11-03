@@ -4,50 +4,29 @@ datasource db {
   directUrl = env("POSTGRES_URL_NON_POOLING") // uses a direct connection
 }
 
-enum DocumentType {
-  devis
-  facture
-}
-
 
 generator client {
   provider = "prisma-client-js"
 }
 
-model Document {
-  id        Int      @id @default(autoincrement())
-  nom       String
-  type      DocumentType
-  url       String
-  devis     Devis?
-  devisId   Int?     @unique
-  facture   Facture? 
-  factureId Int?     @unique
-}
 model Devis {
   id        Int      @id @default(autoincrement())
-  numDevis  Int
   clientId  Int
   client    Client   @relation(fields: [clientId], references: [id])
   montant   Float
   date      DateTime @default(now())
   User      User     @relation(fields: [userId], references: [id])
   userId    Int
-  document  Document @relation(fields: [documentId], references: [id])
-  documentId Int @unique
 }
 
 model Facture {
   id        Int      @id @default(autoincrement())
-  numFacture  Int
   clientId  Int
   client    Client   @relation(fields: [clientId], references: [id])
   montant   Float
   date      DateTime @default(now())
   User      User     @relation(fields: [userId], references: [id])
   userId    Int
-  document  Document @relation(fields: [documentId], references: [id])
-  documentId Int @unique
 }
 
 
@@ -60,8 +39,6 @@ model Client {
   adresse   String
   ville     String
   codePostal String
-  Siret     String
-  NomSociete String
   devis     Devis[]
   factures  Facture[]
 }
@@ -78,8 +55,6 @@ model User {
   adresse  String
   ville    String
   codePostal String
-  Siret    String
-  NomSociete String
   devis    Devis[]
   factures Facture[]
 }
