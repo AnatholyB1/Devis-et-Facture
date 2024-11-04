@@ -99,3 +99,27 @@ export async function DELETE(req: NextRequest) {
 }
 
 
+
+//get client by email
+export async function GET(req: NextRequest) {
+
+    try {
+        const { searchParams } = new URL(req.url);
+        const email = searchParams.get('email');
+    
+        if (!email) {
+            return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+        }
+    
+        const client: Client | null = await prisma.client.findFirst({
+            where: { email: email }
+        });
+    
+    
+        return NextResponse.json(client, { status: 200 });
+    } catch (error) {
+        return NextResponse.json({ error }, { status: 500 });
+    }
+}
+
+
