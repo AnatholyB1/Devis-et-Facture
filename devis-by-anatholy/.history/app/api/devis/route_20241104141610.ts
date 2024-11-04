@@ -85,3 +85,20 @@ export async function DELETE(req: NextRequest) {
   }
 }
 
+//get devis by id
+export async function GET(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get('id');
+    if (!id) {
+      return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
+    }
+
+    const devis: Devis | null = await prisma.devis.findUnique({
+      where: { id:id }
+    });
+    return NextResponse.json(devis, { status: 200 });
+  } catch (error) {
+    return NextResponse.json({ error }, { status: 500 });
+  }
+}
