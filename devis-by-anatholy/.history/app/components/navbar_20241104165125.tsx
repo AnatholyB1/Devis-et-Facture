@@ -1,16 +1,14 @@
 "use client"
-import { AppBar, Toolbar, Typography } from '@mui/material';
+import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useSession } from 'next-auth/react';
-import { Button } from "@/components/ui/button"
-
 
 const Navbar: React.FC = () => {
     const {data}  =  useSession();
 
     return (
-        <AppBar position="static" className='!bg-foreground'>
-            <Toolbar className='gap-4'>
+        <AppBar position="static">
+            <Toolbar className='p-2'>
                 <Typography variant="h6" style={{ flexGrow: 1 }}>
                     Devis By Anatholy
                 </Typography>

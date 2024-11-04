@@ -9,7 +9,7 @@ const Navbar: React.FC = () => {
     const {data}  =  useSession();
 
     return (
-        <AppBar position="static" className='!bg-foreground'>
+        <AppBar position="static">
             <Toolbar className='gap-4'>
                 <Typography variant="h6" style={{ flexGrow: 1 }}>
                     Devis By Anatholy

@@ -4,7 +4,6 @@ import Footer from './components/footer';
 import { ReactNode } from 'react';
 import './globals.css';
 import { SessionProvider } from 'next-auth/react';
-import ProtectedRoute from '@/lib/protectedRoute';
 
 export default function RootLayout({ children }: { children: ReactNode}) {
   return (
@@ -16,11 +15,9 @@ export default function RootLayout({ children }: { children: ReactNode}) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-      <ProtectedRoute>
         <Navbar />
         <main>{children}</main>
         <Footer />
-      </ProtectedRoute>
       </body>
     </html>
     </SessionProvider>

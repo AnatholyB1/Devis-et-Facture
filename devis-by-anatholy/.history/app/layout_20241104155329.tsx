@@ -1,14 +1,10 @@
-"use client"
 import Navbar from './components/navbar';
 import Footer from './components/footer';
 import { ReactNode } from 'react';
 import './globals.css';
-import { SessionProvider } from 'next-auth/react';
-import ProtectedRoute from '@/lib/protectedRoute';
 
-export default function RootLayout({ children }: { children: ReactNode}) {
+export default function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <SessionProvider >
     <html lang="en">
       <head>
         <title>Devis by Anatholy</title>
@@ -16,13 +12,11 @@ export default function RootLayout({ children }: { children: ReactNode}) {
         <link rel="icon" href="/favicon.ico" />
       </head>
       <body>
-      <ProtectedRoute>
         <Navbar />
+        jhgyu 
         <main>{children}</main>
         <Footer />
-      </ProtectedRoute>
       </body>
     </html>
-    </SessionProvider>
   );
 }
